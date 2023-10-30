@@ -7,7 +7,12 @@ on:
 jobs:
   
   pull-request-check:
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - windows-latest
 
     steps:
 
@@ -18,9 +23,17 @@ jobs:
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: 6.0.x
-
-      - name: Install .NET MAUI
-        run: dotnet workload install maui
+          
+      - name: Install MAUI Workloads for macOS
+        if: matrix.os == 'macos'
+        run: |
+          dotnet workload install maccatalyst --ignore-failed-sources
+          dotnet workload install maui --ignore-failed-sources
+          
+      - name: Install MAUI Workloads for Windows
+        if: matrix.os == 'windows'
+        run: |
+          dotnet workload install maui --ignore-failed-sources
 
       - name: Restore dependencies
         run: dotnet restore source/
@@ -28,5 +41,5 @@ jobs:
       - name: Build and analyze
         shell: pwsh
         run: |
-          dotnet build --configuration Release --no-restore source/
+          dotnet build  source/ -c Release -f net6.0-maccatalyst --no-restore
           dotnet test source/
