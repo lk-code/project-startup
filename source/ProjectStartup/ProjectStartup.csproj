@@ -15,7 +15,7 @@
 		<ApplicationTitle>ProjectStartup</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.projectstartup</ApplicationId>
+		<ApplicationId>dev.lk-code.projectstartup</ApplicationId>
 		<ApplicationIdGuid>b301b84a-fee3-4eb5-bf2e-1aba989d2ca6</ApplicationIdGuid>
 
 		<!-- Versions -->
