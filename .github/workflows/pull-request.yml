@@ -11,9 +11,9 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-latest
-#          - macos-latest
-#          - windows-latest
+#          - ubuntu-latest
+          - macos-latest
+          - windows-latest
 
     steps:
 
@@ -25,37 +25,37 @@ jobs:
         with:
           dotnet-version: 6.0.x
         
-#      - name: Install MAUI Workloads for macOS
-#        if: matrix.os == 'macos-latest'
-#        run: |
-#          dotnet workload install maccatalyst --ignore-failed-sources
-#          dotnet workload install maui --ignore-failed-sources
+      - name: Install MAUI Workloads for macOS
+        if: matrix.os == 'macos-latest'
+        run: |
+          dotnet workload install macos --ignore-failed-sources
+          dotnet workload install maui --ignore-failed-sources
           
-#      - name: Install MAUI Workloads for Windows
-#        if: matrix.os == 'windows-latest'
-#        run: |
-#          dotnet workload install maui --ignore-failed-sources
+      - name: Install MAUI Workloads for Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          dotnet workload install maui --ignore-failed-sources
 
       - name: Restore dependencies
         run: dotnet restore source/
+
+#      - name: Build and analyze
+#        if: matrix.os == 'macos-latest'
+#        shell: pwsh
+#        run: |
+#          dotnet build source/ -c Release -f net6.0 --no-restore
+#          dotnet test source/
 
       - name: Build and analyze
         if: matrix.os == 'macos-latest'
         shell: pwsh
         run: |
-          dotnet build source/ -c Release -f net6.0 --no-restore
+          dotnet build source/ -c Release -f net6.0-maccatalyst --no-restore
           dotnet test source/
 
-#      - name: Build and analyze
-#        if: matrix.os == 'macos-latest'
-#        shell: pwsh
-#        run: |
-#          dotnet build source/ -c Release -f net6.0-maccatalyst --no-restore
-#          dotnet test source/
-#
-#      - name: Build and analyze
-#        if: matrix.os == 'windows-latest'
-#        shell: pwsh
-#        run: |
-#          dotnet build source/ -c Release -f net6.0-windows10.0.19041.0 --no-restore
-#          dotnet test source/
+      - name: Build and analyze
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          dotnet build source/ -c Release -f net6.0-windows10.0.19041.0 --no-restore
+          dotnet test source/
