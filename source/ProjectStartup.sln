@@ -12,6 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{3F
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{0128672D-F87A-4220-BD92-EC6048816D50}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\pull-request.yml = ..\.github\workflows\pull-request.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +35,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0128672D-F87A-4220-BD92-EC6048816D50} = {3FD7B9DA-9EBD-451B-AEEE-BA41E9024A94}
 	EndGlobalSection
 EndGlobal
