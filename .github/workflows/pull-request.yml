@@ -50,7 +50,7 @@ jobs:
         if: matrix.os == 'macos-latest'
         shell: pwsh
         run: |
-          dotnet build source/ -c Release -f net6.0-maccatalyst --no-restore
+          dotnet build source/ -c Release -f net6.0-maccatalyst --no-restore /p:PublishTrimmed=false
           dotnet test source/
 
       - name: Build and analyze
